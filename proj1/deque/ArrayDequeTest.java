@@ -7,18 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 public class ArrayDequeTest {
 
-    /**
-     * create a new int ArrayDeque from 1 to size use addFirst
-     * @param size
-     * @return Deque<Integer>
-     */
-    private ArrayDeque<Integer> createDeque(int size) {
-        ArrayDeque<Integer> ans = new ArrayDeque<>();
-        for (int i = 0; i < size; i++) {
-            ans.addFirst(i);
-        }
-        return ans;
-    }
 
     @Test
     /**
@@ -39,22 +27,33 @@ public class ArrayDequeTest {
     /**
      * Add things use .addLast() and .removeLast
      * to check whether the array is correctly circular
-     * TODO:test if remove and add work well
-     * 1. add over
-     * 2. remove over
      */
     public void circularTest(){
+
+        // test whether .addLast() and .removeLast() goes well
         ArrayDeque<Integer> test = new ArrayDeque<>();
-        test.addLast(1);
-        test.addLast(2);
-        test.addLast(3);
-        test.addLast(4);
+        for (int i = 1; i < 5; i++) {
+            test.addLast(i);
+        }
         assertEquals(4, test.size());
         int last = test.removeLast();
         assertEquals(4, last);
         last = test.removeLast();
         assertEquals(3, last);
         assertEquals(2, test.size());
+        last = test.removeLast();
+        assertEquals(2, last);
+        assertEquals(1, test.size());
+
+        // test whether .addFirst() and .removeFirst() goes well
+        test.clear();
+        // fully fill the deque test
+        for (int i = 0; i < 8; i++) {
+            test.addFirst(i);
+        }
+        int first = test.removeFirst();;
+        assertEquals(7, first);
+        assertEquals(7,test.size());
     }
     @Test
     /**
@@ -62,8 +61,14 @@ public class ArrayDequeTest {
      * 1. is circular rightly?
      * 2. the Deque is not changed
      *
-     * TODO: test the getAllItems func!
      */
-    public void getAllItemsTest() {
+    public void arrayDequeTest() {
+        ArrayDeque<Integer> test = new ArrayDeque<>();
+        for (int i = 0; i < 7; i++) {
+            test.addFirst(i);
+        }
+        test.printDeque();
+
     }
+
 }

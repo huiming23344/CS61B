@@ -1,6 +1,9 @@
 package deque;
 
 import org.junit.Test;
+
+import java.util.Iterator;
+
 import static org.junit.Assert.*;
 
 
@@ -29,6 +32,8 @@ public class LinkedListDequeTest {
 
 		lld1.addLast("back");
 		assertEquals(3, lld1.size());
+
+        lld1.addFirst("youCannotPrint");
 
 		System.out.println("Printing out deque: ");
 		lld1.printDeque();
@@ -118,5 +123,24 @@ public class LinkedListDequeTest {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
 
+    }
+
+    @Test
+    /**
+     *  checkout whether iterator worked well
+     */
+    public void iteratorTest() {
+        // Test by print out
+        LinkedListDeque<Integer> test = new LinkedListDeque<>();
+        for (int i = 0; i < 8; i++) {
+            test.addFirst(i);
+        }
+        for (int j = 0; j > -8; j--) {
+            test.addLast(j);
+        }
+        Iterator<Integer> test_iter = test.Iterator();
+        while (test_iter.hasNext()) {
+            System.out.println("" + test_iter.next());
+        }
     }
 }

@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
-public class LinkedListDeque<item> implements Deque {
+public class LinkedListDeque<item> implements Deque, Iterable{
     public class Node {
         public item item;
         public Node next;
@@ -20,6 +20,29 @@ public class LinkedListDeque<item> implements Deque {
             item = null;
             previous = null;
             next = null;
+        }
+    }
+
+    private class linkedListDequeIterator implements Iterator {
+
+        private Node cur_node = new Node();
+
+        public linkedListDequeIterator() {
+            if (size == 0) {
+                System.out.println("it is an empty Deque");
+            } else {
+                cur_node = sentinel.next;
+            }
+        }
+        @Override
+        public boolean hasNext() {
+            return cur_node != sentinel;
+        }
+
+        @Override
+        public Object next() {
+            cur_node = cur_node.next;
+            return cur_node.previous.item;
         }
     }
 
@@ -40,7 +63,10 @@ public class LinkedListDeque<item> implements Deque {
         sentinel = sent;
     }
 
-    //TODO: implement an  LinkedListDeque iterator here
+    public Iterator<item> Iterator() {
+        Iterator<item> ans = new linkedListDequeIterator();
+        return ans;
+    }
 
     public boolean printDeque() {
         if (size == 0) {
@@ -48,8 +74,8 @@ public class LinkedListDeque<item> implements Deque {
             return false;
         } else {
             Node cur_node = new Node();
-            cur_node = sentinel.previous;
-            while(cur_node.next != sentinel) {
+            cur_node = sentinel.next;
+            while(cur_node != sentinel) {
                 System.out.println("" + cur_node.item);
                 cur_node = cur_node.next;
             }
@@ -73,18 +99,28 @@ public class LinkedListDeque<item> implements Deque {
         size++;
     }
 
+    /**
+     * .offer func should simply return false if the list is full,
+     * but it won't
+     * so we just do the same thing as add
+     * @param o the element to add
+     * @return
+     */
     @Override
-    //TODO:fix .offer here
     public boolean offerLast(Object o) {
-        if (size == 0) return false;
-        o = sentinel.previous.item;
+        Node to_add_last = new Node((item) o, sentinel, sentinel.next);
+        sentinel.next.previous = to_add_last;
+        sentinel.next = to_add_last;
+        size++;
         return true;
     }
 
     @Override
     public boolean offerFirst(Object o) {
-        if (size == 0) return false;
-        o = sentinel.next.item;
+        Node to_add_last = new Node((item) o, sentinel, sentinel.next);
+        sentinel.next.previous = to_add_last;
+        sentinel.next = to_add_last;
+        size++;
         return true;
     }
 

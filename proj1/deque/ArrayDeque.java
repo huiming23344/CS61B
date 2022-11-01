@@ -29,8 +29,8 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
             return items[cur_pointer];
         }
     }
-    public item[] items;
-    public int size;
+    private item[] items;
+    private int size;
     int first = 3;
     int last = 2;
     public int capacity = 8;
@@ -40,26 +40,11 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         size = 0;
     }
 
-    /**
-     * a helper func to get all the items in Deque as a full Array
-     * the items is sorted from first to last
-     */
-    // TODO: 1. finish this with an iterator? or just implement another iterator func
-    public item[] getAllItems() {
-        item[] itemList = (item[]) new Object[size];
-        int cur_pointer = first;
-        int counter = 0;
-        while (cur_pointer != last + 1 || (cur_pointer == 0 && last == capacity - 1)) {
-            itemList[counter] = items[cur_pointer - 1];
-            counter++;
-            if (cur_pointer == 0) {
-                cur_pointer = capacity - 1;
-            } else {
-                cur_pointer--;
-            }
-        }
-        return itemList;
-    }
+     public Iterator<item> Iterator(){
+        Iterator<item> ans = new ArrayDequeIterator();
+        return ans;
+     }
+
     // TODO: after done with the iterator implement the .reSize func
 
     /**
@@ -70,7 +55,10 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         if (size == 0) {
             System.out.println("It is an empty Deque");
         } else {
-
+            Iterator<item> iterArrayDeque = new ArrayDequeIterator();
+            while (iterArrayDeque.hasNext()) {
+                System.out.println("" + iterArrayDeque.next());
+            }
         }
     }
 
@@ -269,7 +257,8 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
 
     @Override
     public void clear() {
-
+        items = (item[]) new Object[capacity];
+        size = 0;
     }
 
     @Override
