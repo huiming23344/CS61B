@@ -72,6 +72,7 @@ public class LinkedListDeque<item> implements Deque {
     }
 
     @Override
+    //TODO:fix .offer here
     public boolean offerLast(Object o) {
         if (size == 0) return false;
         o = sentinel.previous.item;
