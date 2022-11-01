@@ -10,11 +10,46 @@ public class ArrayDeque<item> implements Deque<item> {
     public int size;
     int first = 3;
     int last = 2;
-    public int capacity = 100;
+    public int capacity = 8;
 
     public ArrayDeque(){
         items = (item[]) new Object[capacity];
         size = 0;
+    }
+
+    /**
+     * a helper func to get all the items in Deque as a full Array
+     * the items is sorted from first to last
+     */
+    // TODO: 1. finish this with an iterator? or just implement another iterator func
+    public item[] getAllItems() {
+        item[] itemList = (item[]) new Object[size];
+        int cur_pointer = first;
+        int counter = 0;
+        while (cur_pointer != last + 1 || (cur_pointer == 0 && last == capacity - 1)) {
+            itemList[counter] = items[cur_pointer - 1];
+            counter++;
+            if (cur_pointer == 0) {
+                cur_pointer = capacity - 1;
+            } else {
+                cur_pointer--;
+            }
+        }
+        return itemList;
+    }
+
+    // TODO: after done with the iterator implement the .reSize func
+
+    /**
+     * print all the items in Deque
+     * or print it is empty
+     */
+    public void printDeque() {
+        if (size == 0) {
+            System.out.println("It is an empty Deque");
+        } else {
+
+        }
     }
 
     @Override
@@ -26,7 +61,6 @@ public class ArrayDeque<item> implements Deque<item> {
         } else {
             first++;
         }
-        System.out.println(size);
     }
 
     @Override
@@ -41,43 +75,67 @@ public class ArrayDeque<item> implements Deque<item> {
     }
 
     @Override
-    // TODO:fix .offer function here
+    /**
+     * the .offerFirst(item) is a func that add an item to first
+     * if failed it will not throw an exception like add func
+     * rather than just return false when the Deque is full
+     *
+     * but here we will handle the size automatically
+     * it just simply return true
+     */
     public boolean offerFirst(item item) {
-        if (size == 0) {
-            return false;
+        items[first] = item;
+        size++;
+        if (first == capacity - 1) {
+            first = 0;
         } else {
-            if (first == 0) {
-                item = items[capacity - 1];
-                return true;
-            } else {
-                item = items[first - 1];
-                return true;
-            }
+            first++;
         }
+        return true;
     }
 
     @Override
     public boolean offerLast(item item) {
-        if (size == 0) {
-            return false;
+        items[last] = item;
+        size++;
+        if (last == 0) {
+            last = capacity - 1;
         } else {
-            if (last == capacity - 1) {
-                item = items[0];
-            } else {
-                item =items[last + 1];
-            }
-            return true;
+            last--;
         }
+        return true;
     }
 
     @Override
     public item removeFirst() {
-        return null;
+        if (size == 0) {
+            System.out.println("It is an empty Deque");
+            return null;
+        } else {
+            if (first == 0) {
+                first = capacity - 1;
+            } else {
+                first = first - 1;
+            }
+            size--;
+            return items[first];
+        }
     }
 
     @Override
     public item removeLast() {
-        return null;
+        if (size == 0) {
+            System.out.println("It is an empty Deque");
+            return null;
+        } else {
+            if (last == capacity - 1) {
+                last = 0;
+            } else {
+                last = last + 1;
+            }
+            size--;
+            return items[last];
+        }
     }
 
     @Override
@@ -92,12 +150,34 @@ public class ArrayDeque<item> implements Deque<item> {
 
     @Override
     public item getFirst() {
-        return null;
+        int first_item = 0;
+        if (size == 0) {
+            System.out.println("It is an empty Deque");
+            return null;
+        } else {
+            if (first == 0) {
+                first_item = capacity - 1;
+            } else {
+                first_item = first - 1;
+            }
+            return items[first_item];
+        }
     }
 
     @Override
     public item getLast() {
-        return null;
+        int last_item = 0;
+        if (size == 0) {
+            System.out.println("It is an empty Deque");
+            return null;
+        } else {
+            if (last == capacity - 1) {
+                last_item = 0;
+            } else {
+                last_item = last + 1;
+            }
+            return items[last_item];
+        }
     }
 
     @Override

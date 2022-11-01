@@ -40,6 +40,8 @@ public class LinkedListDeque<item> implements Deque {
         sentinel = sent;
     }
 
+    //TODO: implement an  LinkedListDeque iterator here
+
     public boolean printDeque() {
         if (size == 0) {
             System.out.println("This is a empty Deque");
