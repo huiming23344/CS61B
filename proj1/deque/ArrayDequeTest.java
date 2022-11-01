@@ -39,6 +39,9 @@ public class ArrayDequeTest {
     /**
      * Add things use .addLast() and .removeLast
      * to check whether the array is correctly circular
+     * TODO:test if remove and add work well
+     * 1. add over
+     * 2. remove over
      */
     public void circularTest(){
         ArrayDeque<Integer> test = new ArrayDeque<>();

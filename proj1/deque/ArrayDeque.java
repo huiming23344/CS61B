@@ -1,11 +1,34 @@
 package deque;
 
+import net.sf.saxon.om.Item;
+
 import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
 
-public class ArrayDeque<item> implements Deque<item> {
+public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
 
+    private class ArrayDequeIterator implements Iterator<item> {
+        int cur_pointer;
+
+        public ArrayDequeIterator(){
+            cur_pointer = first;
+        }
+        @Override
+        public boolean hasNext() {
+            return (cur_pointer != last + 1 || (cur_pointer == 0 && last == capacity - 1));
+        }
+
+        @Override
+        public item next() {
+            if (cur_pointer == 0) {
+                cur_pointer = capacity - 1;
+            } else {
+                cur_pointer--;
+            }
+            return items[cur_pointer];
+        }
+    }
     public item[] items;
     public int size;
     int first = 3;
@@ -37,7 +60,6 @@ public class ArrayDeque<item> implements Deque<item> {
         }
         return itemList;
     }
-
     // TODO: after done with the iterator implement the .reSize func
 
     /**
@@ -291,7 +313,12 @@ public class ArrayDeque<item> implements Deque<item> {
 
     @Override
     public Iterator<item> iterator() {
-        return null;
+        if (size == 0) {
+            return null;
+        } else {
+            Iterator<item> iter = new ArrayDequeIterator();
+            return iter;
+        }
     }
 
     @Override
