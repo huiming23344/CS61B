@@ -54,14 +54,14 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
 
     // TODO: after done with the iterator implement the .reSize func
     // change this to private while done
-    public void reSizing(int new_capacity) {
+    public void resize(int new_capacity) {
         if (size > capacity) {
             System.out.println("The size is bigger then capacity!");
         } else {
             ArrayDeque<item> new_deque = new ArrayDeque<>(new_capacity);
             Iterator<item> oldItemIter = new ArrayDequeIterator();
             while (oldItemIter.hasNext()) {
-                new_deque.addFirst(oldItemIter.next());
+                new_deque.addLast(oldItemIter.next());
             }
             items = new_deque.items;
             first = new_deque.first;
@@ -95,6 +95,11 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         } else {
             first++;
         }
+        // if the size of deque is larger than 75% of the array
+        // resize the array double
+        if (size >= (items.length * 0.75)) {
+            resize(capacity * 2);
+        }
     }
 
     @Override
@@ -105,6 +110,11 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
             last = capacity - 1;
         } else {
             last--;
+        }
+        // if the size of deque is larger than 75% of the array
+        // resize the array double
+        if (size >= (items.length * 0.75)) {
+            resize(capacity * 2);
         }
     }
 
@@ -151,6 +161,10 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
             } else {
                 first = first - 1;
             }
+            // resie the arraydeque half if the size is smaller than 30% of the array
+            if (size <= items.length * 0.3) {
+                resize(capacity / 2);
+            }
             size--;
             return items[first];
         }
@@ -166,6 +180,10 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
                 last = 0;
             } else {
                 last = last + 1;
+            }
+            // resie the arraydeque half if the size is smaller than 30% of the array
+            if (size <= items.length * 0.3) {
+                resize(capacity / 2);
             }
             size--;
             return items[last];

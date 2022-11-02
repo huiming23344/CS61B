@@ -76,14 +76,26 @@ public class ArrayDequeTest {
      * manually resize an arraydeque
      */
     public void manuallyResize() {
-        ArrayDeque<Integer> test = new ArrayDeque<>();
-        for (int i = 0; i < 7; i++) {
-            test.addFirst(i);
+//        ArrayDeque<Integer> test = new ArrayDeque<>();
+//        for (int i = 0; i < 7; i++) {
+//            test.addFirst(i);
+//        }
+//        test.resize(16);
+//        for (int i = 0; i < 7; i++) {
+//            test.addFirst(i);
+//        }
+        //test.printDeque();
+
+        // resize the array auto
+        ArrayDeque<Integer> test2 = new ArrayDeque<>();
+        for (int i = 0; i < 15; i++) {
+            test2.addFirst(i);
         }
-        test.reSizing(16);
-        for (int i = 0; i < 7; i++) {
-            test.addFirst(i);
+        test2.printDeque();
+        System.out.println("---------------------------");
+        for (int i = 0; i < 8; i++) {
+            test2.removeFirst();
         }
-        test.printDeque();
+        test2.printDeque();
     }
 }
