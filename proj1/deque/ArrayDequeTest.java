@@ -71,4 +71,19 @@ public class ArrayDequeTest {
 
     }
 
+    @Test
+    /**
+     * manually resize an arraydeque
+     */
+    public void manuallyResize() {
+        ArrayDeque<Integer> test = new ArrayDeque<>();
+        for (int i = 0; i < 7; i++) {
+            test.addFirst(i);
+        }
+        test.reSizing(16);
+        for (int i = 0; i < 7; i++) {
+            test.addFirst(i);
+        }
+        test.printDeque();
+    }
 }

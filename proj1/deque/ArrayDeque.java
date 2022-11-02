@@ -2,6 +2,7 @@ package deque;
 
 import net.sf.saxon.om.Item;
 
+import java.security.DrbgParameters;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
@@ -39,6 +40,12 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         items = (item[]) new Object[capacity];
         size = 0;
     }
+    public ArrayDeque(int new_cap) {
+        capacity = new_cap;
+        items = (item[]) new Object[new_cap];
+        size = 0;
+    }
+
 
      public Iterator<item> Iterator(){
         Iterator<item> ans = new ArrayDequeIterator();
@@ -46,6 +53,23 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
      }
 
     // TODO: after done with the iterator implement the .reSize func
+    // change this to private while done
+    public void reSizing(int new_capacity) {
+        if (size > capacity) {
+            System.out.println("The size is bigger then capacity!");
+        } else {
+            ArrayDeque<item> new_deque = new ArrayDeque<>(new_capacity);
+            Iterator<item> oldItemIter = new ArrayDequeIterator();
+            while (oldItemIter.hasNext()) {
+                new_deque.addFirst(oldItemIter.next());
+            }
+            items = new_deque.items;
+            first = new_deque.first;
+            last = new_deque.last;
+            capacity = new_deque.capacity;
+        }
+    }
+
 
     /**
      * print all the items in Deque
