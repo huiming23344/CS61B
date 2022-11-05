@@ -3,7 +3,7 @@ package student;
 public class StudentArrayDeque<T> {
     private T[] a = (T[]) (new Object[8]);
     private int b = 8;
-    private int c = 0;
+    private int c = 0; // size
     private int d = 4;
     private int e = 4;
     private int f = 5;
@@ -139,7 +139,8 @@ public class StudentArrayDeque<T> {
                     return (T) var1;
                 } else {
                     var1 = this.a[this.d];
-                    this.f = this.d--;
+                    this.f = this.d - 1;
+                    --this.d;
                     this.g = false;
                     return (T) var1;
                 }
