@@ -6,6 +6,8 @@ import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
+// TODO：finish the recursive version of get
+// TODO: 2022/11/5 add the func of equal
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
@@ -158,6 +160,14 @@ public class LinkedListDequeTest {
         toBeTest = test.get(1);
         assertEquals(3, toBeTest);
         toBeTest = test.get(4);
+        assertEquals(0, toBeTest);
+
+        // test the func .getRecursive()
+        toBeTest = test.getRecursive(0);
+        assertEquals(4, toBeTest);
+        toBeTest = test.getRecursive(1);
+        assertEquals(3, toBeTest);
+        toBeTest = test.getRecursive(4);
         assertEquals(0, toBeTest);
     }
 }

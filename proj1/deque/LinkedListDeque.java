@@ -80,6 +80,21 @@ public class LinkedListDeque<item> implements Deque, Iterable{
         }
     }
 
+    public item getRecursive(int Index) {
+        if (size == 0 || Index >= size) {
+            return null;
+        } else {
+            return recHelper(Index, sentinel.next);
+        }
+    }
+
+    private item recHelper(int Index, Node node) {
+        if (Index == 0) {
+            return node.item;
+        } else {
+            return recHelper(Index - 1, node.next);
+        }
+    }
     public boolean printDeque() {
         if (size == 0) {
             System.out.println("This is a empty Deque");
