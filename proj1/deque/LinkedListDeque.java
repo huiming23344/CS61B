@@ -68,6 +68,18 @@ public class LinkedListDeque<item> implements Deque, Iterable{
         return ans;
     }
 
+    public item get(int Index) {
+        if (size == 0 || Index >= size) {
+            return null;
+        } else {
+            Iterator<item> iter = new linkedListDequeIterator();
+            for (int i = 0; i < Index; i++) {
+                iter.next();
+            }
+            return iter.next();
+        }
+    }
+
     public boolean printDeque() {
         if (size == 0) {
             System.out.println("This is a empty Deque");

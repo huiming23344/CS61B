@@ -76,7 +76,6 @@ public class ArrayDequeTest {
      * manually resize an arraydeque
      */
     public void manuallyResize() {
-//        ArrayDeque<Integer> test = new ArrayDeque<>();
 //        for (int i = 0; i < 7; i++) {
 //            test.addFirst(i);
 //        }
@@ -97,5 +96,22 @@ public class ArrayDequeTest {
             test2.removeFirst();
         }
         test2.printDeque();
+    }
+
+    @Test
+    /**
+     * add few items and test .get()
+     */
+    public void getTest() {
+        ArrayDeque<Integer> test = new ArrayDeque<>();
+        for (int i = 0; i < 5; i++) {
+            test.addFirst(i);
+        }
+        int toBeTest = test.get(0);
+        assertEquals(4, toBeTest);
+        toBeTest = test.get(1);
+        assertEquals(3, toBeTest);
+        toBeTest = test.get(3);
+        assertEquals(1, toBeTest);
     }
 }

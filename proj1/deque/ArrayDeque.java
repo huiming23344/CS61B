@@ -52,9 +52,8 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         return ans;
      }
 
-    // TODO: after done with the iterator implement the .reSize func
     // change this to private while done
-    public void resize(int new_capacity) {
+    private void resize(int new_capacity) {
         if (size > capacity) {
             System.out.println("The size is bigger then capacity!");
         } else {
@@ -67,6 +66,18 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
             first = new_deque.first;
             last = new_deque.last;
             capacity = new_deque.capacity;
+        }
+    }
+
+    public item get(int index) {
+        if (size == 0 || index >= size) {
+            return null;
+        } else {
+            Iterator<item> iter = new ArrayDequeIterator();
+            for (int i = 0; i < index; i++) {
+                iter.next();
+            }
+            return iter.next();
         }
     }
 

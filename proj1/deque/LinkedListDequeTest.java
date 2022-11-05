@@ -143,4 +143,21 @@ public class LinkedListDequeTest {
             System.out.println("" + test_iter.next());
         }
     }
+
+    @Test
+    /**
+     * add some items and tset .get
+     */
+    public void getTest() {
+        LinkedListDeque<Integer> test = new LinkedListDeque<>();
+        for (int i = 0; i < 5; i++) {
+            test.addFirst(i);
+        }
+        int toBeTest = test.get(0);
+        assertEquals(4, toBeTest);
+        toBeTest = test.get(1);
+        assertEquals(3, toBeTest);
+        toBeTest = test.get(4);
+        assertEquals(0, toBeTest);
+    }
 }
