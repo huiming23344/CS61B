@@ -6,8 +6,6 @@ import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
-// TODO：finish the recursive version of get
-// TODO: 2022/11/5 add the func of equal
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
@@ -117,12 +115,12 @@ public class LinkedListDequeTest {
             lld1.addLast(i);
         }
 
-        for (double i = 0; i < 500000; i++) {
-            assertEquals("Should have the same value", i, (double) lld1.removeFirst(), 0.0);
+        for (int i = 0; i < 500000; i++) {
+            assertEquals("Should have the same value", i, lld1.removeFirst());
         }
 
-        for (double i = 999999; i > 500000; i--) {
-            assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
+        for (int  i = 999999; i > 500000; i--) {
+            assertEquals("Should have the same value", i, lld1.removeLast());
         }
 
     }
@@ -169,5 +167,29 @@ public class LinkedListDequeTest {
         assertEquals(3, toBeTest);
         toBeTest = test.getRecursive(4);
         assertEquals(0, toBeTest);
+    }
+
+    @Test
+    /**
+     * test .equals()
+     */
+    public void equalsTest() {
+        LinkedListDeque<Integer> test1 = new LinkedListDeque<>();
+        LinkedListDeque<Integer> test2 = new LinkedListDeque<>();
+        for (int i = 0; i < 4; i++) {
+            test1.addFirst(i);
+            test2.addFirst(i);
+        }
+        assertTrue(test1.equals(test1));
+        assertTrue(test1.equals(test2));
+        assertTrue(test2.equals(test1));
+
+        // add another int to test2 and should not be equal again
+        test2.addFirst(3);
+        assertFalse(test1.equals(test2));
+
+        // add a different int to test1 and should not be equal
+        test1.addFirst(1);
+        assertFalse(test1.equals(test2));
     }
 }

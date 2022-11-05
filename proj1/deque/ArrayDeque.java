@@ -81,6 +81,20 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         }
     }
 
+    public boolean equals(ArrayDeque d) {
+        if (size != d.size()) {
+            return false;
+        } else {
+            Iterator<item> self_iter = new ArrayDequeIterator();
+            Iterator<item> d_iter = d.Iterator();
+            while (d_iter.hasNext()) {
+                if (d_iter.next() != self_iter.next()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
 
     /**
      * print all the items in Deque

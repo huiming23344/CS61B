@@ -2,8 +2,7 @@ package deque;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ArrayDequeTest {
 
@@ -113,5 +112,24 @@ public class ArrayDequeTest {
         assertEquals(3, toBeTest);
         toBeTest = test.get(3);
         assertEquals(1, toBeTest);
+    }
+
+    @Test
+    public void equalsTest() {
+        ArrayDeque<Integer> test1 = new ArrayDeque<>();
+        ArrayDeque<Integer> test2 = new ArrayDeque<>();
+        for (int i = 0; i < 10; i++) {
+            test1.addFirst(i);
+            test2.addFirst(i);
+        }
+        assertTrue(test1.equals(test1));
+        assertTrue(test1.equals(test2));
+        assertTrue(test2.equals(test1));
+
+        test1.addFirst(2);
+        assertFalse(test1.equals(test2));
+
+        test2.addFirst(4);
+        assertFalse(test1.equals(test2));
     }
 }

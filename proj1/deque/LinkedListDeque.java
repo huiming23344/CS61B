@@ -4,6 +4,7 @@ import java.awt.print.Printable;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class LinkedListDeque<item> implements Deque, Iterable{
     public class Node {
@@ -95,6 +96,22 @@ public class LinkedListDeque<item> implements Deque, Iterable{
             return recHelper(Index - 1, node.next);
         }
     }
+
+    public boolean equals(LinkedListDeque o) {
+        if (size != o.size()) {
+            return false;
+        } else {
+            Iterator<item> self_iter = new linkedListDequeIterator();
+            Iterator<item> o_iter = o.Iterator();
+            while (o_iter.hasNext()) {
+                if (self_iter.next() != o_iter.next()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
     public boolean printDeque() {
         if (size == 0) {
             System.out.println("This is a empty Deque");
