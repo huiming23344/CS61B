@@ -1,7 +1,9 @@
 package deque;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 
+import java.util.Deque;
 import java.util.Iterator;
 
 import static org.junit.Assert.*;
@@ -191,5 +193,56 @@ public class LinkedListDequeTest {
         // add a different int to test1 and should not be equal
         test1.addFirst(1);
         assertFalse(test1.equals(test2));
+    }
+
+    @Test
+    public void randomTest() {
+        LinkedListDeque<Integer> test = new LinkedListDeque<>();
+        Deque<Integer> solution = new java.util.ArrayDeque<>();
+        assertTrue(test.isEmpty());
+        assertTrue(solution.isEmpty());
+        int times = 100000;
+        for (int i = 0; i < times; i++) {
+            System.out.println("test time:" + i);
+            int operationCode = StdRandom.uniform(0, 5);
+            System.out.println("opcode: " + operationCode);
+            if (operationCode == 0 || test.size() == 0) {
+                // test the add func
+                int toBeAdd = StdRandom.uniform(0, 100);
+                test.addFirst(toBeAdd);
+                solution.addFirst(toBeAdd);
+                assertEquals(test.size(), solution.size());
+            }
+            if (operationCode == 1) {
+                int toBeAdd = StdRandom.uniform(0, 100);
+                System.out.println("test.size: " + test.size());
+                test.addLast(1);
+                solution.addLast(1);
+                assertEquals(test.size(), solution.size());
+            }
+            if (operationCode == 2) {
+                // test the remove func
+                int num_stu = (int) test.removeFirst();
+                int num_sol = solution.removeFirst();
+                assertEquals(num_sol, num_stu);
+                assertEquals(test.size(), solution.size());
+            }
+            if (operationCode == 3) {
+                assertEquals(test.size(), solution.size());
+                int size = solution.size();
+                int sol = solution.removeLast();
+                int sul = (int) test.removeLast();
+
+                assertEquals(test.size(), solution.size());
+            }
+            if (operationCode == 5) {
+                // test get func
+                int Index = StdRandom.uniform(0, test.size());
+                int stu = test.get(Index);
+                //int sol = solution.get(Index);
+                //assertEquals(stu, sol);
+                //assertEquals(test.size(), solution.size());
+            }
+        }
     }
 }

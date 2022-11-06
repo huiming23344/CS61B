@@ -2,6 +2,7 @@ package deque;
 
 import net.sf.saxon.om.Item;
 
+import java.io.IOException;
 import java.security.DrbgParameters;
 import java.util.Collection;
 import java.util.Deque;
@@ -57,10 +58,23 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         if (size > capacity) {
             System.out.println("The size is bigger then capacity!");
         } else {
+
+            System.out.println("start to resize func");
+            System.out.println("size: " + size);
+            System.out.println("cap: " + capacity);
+            System.out.println("new_cap: " + new_capacity);
             ArrayDeque<item> new_deque = new ArrayDeque<>(new_capacity);
             Iterator<item> oldItemIter = new ArrayDequeIterator();
+            int test_times = 0;
             while (oldItemIter.hasNext()) {
-                new_deque.addLast(oldItemIter.next());
+                //test code
+
+                //System.out.println("test_times: " + test_times);
+                test_times++;
+                item toBeAdd = oldItemIter.next();
+                if (true) {
+                    new_deque.addLast(toBeAdd);
+                }
             }
             items = new_deque.items;
             first = new_deque.first;
@@ -113,6 +127,11 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
 
     @Override
     public void addFirst(item item) {
+        // if the size of deque is larger than 75% of the array
+        // resize the array double
+        if (size >= (capacity * 0.5)) {
+            resize(capacity * 2);
+        }
         items[first] = item;
         size++;
         if (first == capacity - 1) {
@@ -120,10 +139,14 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         } else {
             first++;
         }
-        // if the size of deque is larger than 75% of the array
-        // resize the array double
-        if (size >= (items.length * 0.75)) {
-            resize(capacity * 2);
+    }
+    private void addFirstHelper(item item) {
+        items[first] = item;
+        size++;
+        if (first == capacity - 1) {
+            first = 0;
+        } else {
+            first++;
         }
     }
 
@@ -138,11 +161,29 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         }
         // if the size of deque is larger than 75% of the array
         // resize the array double
-        if (size >= (items.length * 0.75)) {
+        if (size > (capacity * 0.5)) {
+
+            if (size > 100) {
+                System.out.println("11111111");
+            }
+            System.out.println("in the addLast func let's find out why did it resize again");
+            System.out.println("size: " + size);
+            System.out.println("cap: " + capacity);
+            System.out.println("the deque before resize--------------------");
+            //printDeque();
+            System.out.println("-------------------------------------------------------------");
             resize(capacity * 2);
         }
     }
-
+    private void addLastHelper(item item) {
+        items[last] = item;
+        size++;
+        if (last == 0) {
+            last = capacity - 1;
+        } else {
+            last--;
+        }
+    }
     @Override
     /**
      * the .offerFirst(item) is a func that add an item to first
@@ -181,14 +222,14 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
             System.out.println("It is an empty Deque");
             return null;
         } else {
+            // resie the arraydeque half if the size is smaller than 30% of the array
+            if (size <= items.length * 0.4 && size > 8) {
+                resize(capacity / 2);
+            }
             if (first == 0) {
                 first = capacity - 1;
             } else {
                 first = first - 1;
-            }
-            // resie the arraydeque half if the size is smaller than 30% of the array
-            if (size <= items.length * 0.3) {
-                resize(capacity / 2);
             }
             size--;
             return items[first];
@@ -201,14 +242,17 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
             System.out.println("It is an empty Deque");
             return null;
         } else {
+            // resie the arraydeque half if the size is smaller than 30% of the array
+            if (size <= items.length * 0.4 && size > 8) {
+                System.out.println("start resizing in removeLast");
+                System.out.println("size: " + size);
+                System.out.println("cap: " + capacity);
+                resize(capacity / 2);
+            }
             if (last == capacity - 1) {
                 last = 0;
             } else {
                 last = last + 1;
-            }
-            // resie the arraydeque half if the size is smaller than 30% of the array
-            if (size <= items.length * 0.3) {
-                resize(capacity / 2);
             }
             size--;
             return items[last];
