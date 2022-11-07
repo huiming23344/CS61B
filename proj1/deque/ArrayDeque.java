@@ -18,7 +18,14 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         }
         @Override
         public boolean hasNext() {
-            return (cur_pointer != last + 1 || (cur_pointer == 0 && last == capacity - 1));
+            boolean flag = true;
+            if (cur_pointer == last + 1) {
+                flag = false;
+            }
+            if (cur_pointer == 0 && last == capacity - 1) {
+                flag = false;
+            }
+            return flag;
         }
 
         @Override
@@ -58,19 +65,15 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         if (size > capacity) {
             System.out.println("The size is bigger then capacity!");
         } else {
-
-            System.out.println("start to resize func");
-            System.out.println("size: " + size);
-            System.out.println("cap: " + capacity);
-            System.out.println("new_cap: " + new_capacity);
+//            System.out.println("start to resize func");
+//            System.out.println("first: " + first);
+//            System.out.println("last:" + last);
+//            System.out.println("size: " + size);
+//            System.out.println("cap: " + capacity);
+//            System.out.println("new_cap: " + new_capacity);
             ArrayDeque<item> new_deque = new ArrayDeque<>(new_capacity);
             Iterator<item> oldItemIter = new ArrayDequeIterator();
-            int test_times = 0;
             while (oldItemIter.hasNext()) {
-                //test code
-
-                //System.out.println("test_times: " + test_times);
-                test_times++;
                 item toBeAdd = oldItemIter.next();
                 if (true) {
                     new_deque.addLast(toBeAdd);
@@ -129,7 +132,7 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
     public void addFirst(item item) {
         // if the size of deque is larger than 75% of the array
         // resize the array double
-        if (size >= (capacity * 0.5)) {
+        if (size >= (capacity * 0.7)) {
             resize(capacity * 2);
         }
         items[first] = item;
@@ -161,17 +164,13 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
         }
         // if the size of deque is larger than 75% of the array
         // resize the array double
-        if (size > (capacity * 0.5)) {
-
-            if (size > 100) {
-                System.out.println("11111111");
-            }
-            System.out.println("in the addLast func let's find out why did it resize again");
-            System.out.println("size: " + size);
-            System.out.println("cap: " + capacity);
-            System.out.println("the deque before resize--------------------");
-            //printDeque();
-            System.out.println("-------------------------------------------------------------");
+        if (size > (capacity * 0.7)) {
+//            System.out.println("in the addLast func let's find out why did it resize again");
+//            System.out.println("size: " + size);
+//            System.out.println("cap: " + capacity);
+//            System.out.println("the deque before resize--------------------");
+//            //printDeque();
+//            System.out.println("-------------------------------------------------------------");
             resize(capacity * 2);
         }
     }
@@ -223,7 +222,7 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
             return null;
         } else {
             // resie the arraydeque half if the size is smaller than 30% of the array
-            if (size <= items.length * 0.4 && size > 8) {
+            if (size <= items.length * 0.3 && size > 8) {
                 resize(capacity / 2);
             }
             if (first == 0) {
@@ -243,10 +242,7 @@ public class ArrayDeque<item> implements Deque<item> , Iterable<item>{
             return null;
         } else {
             // resie the arraydeque half if the size is smaller than 30% of the array
-            if (size <= items.length * 0.4 && size > 8) {
-                System.out.println("start resizing in removeLast");
-                System.out.println("size: " + size);
-                System.out.println("cap: " + capacity);
+            if (size <= items.length * 0.3 && size > 8) {
                 resize(capacity / 2);
             }
             if (last == capacity - 1) {

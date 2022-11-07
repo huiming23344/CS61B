@@ -145,9 +145,7 @@ public class ArrayDequeTest {
         assertTrue(solution.isEmpty());
         int times = 100000;
         for (int i = 0; i < times; i++) {
-            System.out.println("test time:" + i);
             int operationCode = StdRandom.uniform(0, 5);
-            System.out.println("opcode: " + operationCode);
             if (operationCode == 0 || test.size() == 0) {
                 // test the add func
                 int toBeAdd = StdRandom.uniform(0, 100);
@@ -157,9 +155,8 @@ public class ArrayDequeTest {
             }
             if (operationCode == 1) {
                 int toBeAdd = StdRandom.uniform(0, 100);
-                System.out.println("test.size: " + test.size());
-                test.addLast(1);
-                solution.addLast(1);
+                test.addLast(toBeAdd);
+                solution.addLast(toBeAdd);
                 assertEquals(test.size(), solution.size());
             }
             if (operationCode == 2) {
@@ -215,19 +212,13 @@ public class ArrayDequeTest {
      */
     public void hasNextTest() {
         ArrayDeque<Integer> test = new ArrayDeque<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 9; i++) {
             System.out.println("add" + i);
             test.addLast(i);
         }
         test.printDeque();
-        System.out.println("--------------------------------------");
-        Iterator<Integer> test_iter = test.iterator();
-        int time = 0;
-        while (test_iter.hasNext()) {
-            test_iter.next();
-            System.out.println(time);
-            time++;
-        }
+        test.addLast(3);
+        test.printDeque();
     }
 }
 
