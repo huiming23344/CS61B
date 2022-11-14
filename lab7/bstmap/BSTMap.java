@@ -1,5 +1,6 @@
 package bstmap;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -123,15 +124,32 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B{
      * don't need
      */
     public Set keySet() {
-        return null;
+        if (root == null) {
+            return null;
+        } else {
+            Set<K> ans = new HashSet<>();
+            return ans;
+        }
     }
 
+    private void removeHelper(Node supNode, BSTMap toRemove) {
+
+    }
     @Override
     /**
      * don't need to complete for now
      */
     public Object remove(Object key) {
-        return null;
+        if (root == null) {
+            return null;
+        } else {
+            int cmp = root.key.compareTo((K)key);
+            if (cmp == 0) {
+                V toReturn = root.value;
+                removeHelper(root, );
+                return toReturn;
+            }
+        }
     }
 
     @Override
