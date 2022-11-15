@@ -9,6 +9,8 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B{
     private class Node {
         private K key;
         private V value;
+        // supposed to use node here
+        // maybe I'll change it one day
         private BSTMap left;
         private BSTMap right;
         private int size;
@@ -140,16 +142,17 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B{
      * don't need to complete for now
      */
     public Object remove(Object key) {
-        if (root == null) {
-            return null;
-        } else {
-            int cmp = root.key.compareTo((K)key);
-            if (cmp == 0) {
-                V toReturn = root.value;
-                removeHelper(root, );
-                return toReturn;
-            }
-        }
+//        if (root == null) {
+//            return null;
+//        } else {
+//            int cmp = root.key.compareTo((K)key);
+//            if (cmp == 0) {
+//                V toReturn = root.value;
+//                removeHelper(root, );
+//                return toReturn;
+//            }
+//        }
+        return null;
     }
 
     @Override

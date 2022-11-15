@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -31,6 +32,7 @@ public class TestMyHashMap {
         for (int i = 0; i < 455; i++) {
             b.put("hi" + i, 1);
             //make sure put is working via containsKey and get
+            String a = String.valueOf(b.get("hi" + i));
             assertTrue(null != b.get("hi" + i)
                     && b.containsKey("hi" + i));
         }
@@ -157,5 +159,14 @@ public class TestMyHashMap {
         studentIDs.put("evil alan", 345);
         assertEquals(345, studentIDs.get("evil alan").intValue());
         assertEquals(studentIDs.get("evil alan"), studentIDs.get("alan"));
+    }
+
+    @Test
+    public void reSizeTest() {
+        MyHashMap<Integer, Integer> test = new MyHashMap<>();
+        for (int i = 0; i < 30; i++) {
+            test.put(i, i + 1);
+            assertEquals(i + 1, (int) test.get(i));
+        }
     }
 }
